@@ -5,8 +5,12 @@ output "workspace" {
   value = terraform.workspace
 }
 
+output "env" {
+  value = local.env
+}
+
 output "project_id" {
-  value = data.google_project.default.id
+  value = trimprefix(data.google_project.default.id, "projects/")
 }
 
 output "project_number" {

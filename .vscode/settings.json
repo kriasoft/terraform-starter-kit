@@ -23,6 +23,7 @@
     "**/.pnp.*": true,
     "**/.prettierignore": true,
     "**/.yarn": true,
+    "**/infra/.terraform.lock.hcl": true,
     "**/LICENSE": true,
     "**/Thumbs.db": true,
     "**/yarn.lock": true

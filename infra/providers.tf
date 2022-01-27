@@ -44,3 +44,5 @@ provider "google-beta" {
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
+
+data "google_project" "default" {}

@@ -13,6 +13,21 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "jest.jestCommandLine": "yarn jest",
+  "terminal.integrated.env.osx": {
+    "TF_DATA_DIR": "${workspaceFolder}/.terraform",
+    "TF_CLI_CONFIG_FILE": "${workspaceFolder}/.terraformrc",
+    "TF_WORKSPACE": "test"
+  },
+  "terminal.integrated.env.linux": {
+    "TF_DATA_DIR": "${workspaceFolder}/.terraform",
+    "TF_CLI_CONFIG_FILE": "${workspaceFolder}/.terraformrc",
+    "TF_WORKSPACE": "test"
+  },
+  "terminal.integrated.env.windows": {
+    "TF_DATA_DIR": "${workspaceFolder}\\.terraform",
+    "TF_CLI_CONFIG_FILE": "${workspaceFolder}\\.terraformrc",
+    "TF_WORKSPACE": "test"
+  },
   "files.associations": {
     ".terraformrc": "terraform"
   },

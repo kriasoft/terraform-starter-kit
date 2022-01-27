@@ -41,20 +41,17 @@ process.on("uncaughtException", (/** @type {NodeJS.ErrnoException} */ err) => {
 
 const args = process.argv.slice(2);
 
+const vars = Object.keys(env).reduce(
+  (acc, key) => ({ ...acc, [key.toLowerCase()]: env[key] }),
+  {}
+);
+
 // See `infra/variables.tf`
 // https://www.terraform.io/language/values/variables
 if (["plan", "apply", "import"].includes(args[0])) {
   fs.writeFileSync(
     path.join(cwd, "infra/.auto.tfvars.json"),
-    JSON.stringify(
-      {
-        project: env.PROJECT,
-        region: env.REGION,
-        zone: env.ZONE,
-      },
-      null,
-      "  "
-    ),
+    JSON.stringify(vars, null, "  "),
     "utf-8"
   );
 }

@@ -12,3 +12,16 @@ variable "region" {
 variable "zone" {
   description = "The GCP zone"
 }
+
+variable "cloudflare_account_id" {
+  description = "Cloudflare Account ID"
+}
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare Zone ID"
+}
+
+variable "cloudflare_api_token" {
+  description = "Cloudflare API Token"
+  sensitive   = true
+}

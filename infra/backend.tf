@@ -6,7 +6,7 @@ terraform {
     organization = "example"
 
     workspaces {
-      prfix = "app-"
+      prefix = "app-"
     }
   }
 }

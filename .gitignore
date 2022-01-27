@@ -1,0 +1,46 @@
+# VSCode Editor
+# https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Yarn Package Manager
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Terraform
+# https://github.com/github/gitignore/blob/main/Terraform.gitignore
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.terraformrc
+override.tf
+crash.log
+crash.*.log
+
+# Environment Variables
+*.override.env
+
+# Logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+.history/
+
+# macOS
+# https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
+.DS_Store

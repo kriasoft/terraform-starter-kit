@@ -97,7 +97,7 @@ $ terraform -chdir=infra apply -auto-approve
 ```
 
 Note that it uses `test` as the default workspace environment defined
-in VSCode's [integrated terminal settings](.vscode/settings.json#L16-L30).
+in VSCode's [integrated terminal settings](https://github.com/kriasoft/terraform-starter-kit/blob/93d109109d96e59421ebbd760e0e6a1fe6c2e161/.vscode/settings.json#L16-L30).
 
 To use a different environment set the `TF_WORKSPACE` environment variable:
 
@@ -110,19 +110,19 @@ Alternatively, use the wrapper CLI:
 
 ```bash
 # Uses `test` environment by default
-$ yarn tf plan
-$ yarn tf apply -auto-approve
+$ yarn plan
+$ yarn apply -auto-approve
 
 # Explicitly setting `prod` as the selected workspace environment
-$ yarn tf plan --env=prod
-$ yarn tf apply --env=prod -auto-approve
+$ yarn plan --env=prod
+$ yarn apply --env=prod -auto-approve
 ```
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=tomUWcQ0P3k"><img src="https://user-images.githubusercontent.com/197134/151321818-d47fe54f-c19e-4d4c-9834-c33e589a33e1.png" alt="" width="640" height="360" /></a>
 </p>
 
-Fore more information visit [learn.hashicorp.com/terraform](https://learn.hashicorp.com/terraform) or join a discussion on [Discord](https://discord.gg/ZwkR8E3tFm).
+Fore more information visit [learn.hashicorp.com/terraform](https://learn.hashicorp.com/terraform) or join the discussion on [Discord](https://discord.gg/ZwkR8E3tFm).
 
 ## Related Projects
 

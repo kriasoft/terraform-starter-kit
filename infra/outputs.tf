@@ -16,3 +16,12 @@ output "project" {
 output "project_number" {
   value = data.google_project.default.number
 }
+
+output "cloudflare" {
+  value = {
+    zone = {
+      id     = cloudflare_zone.default.id
+      status = cloudflare_zone.default.status
+    }
+  }
+}

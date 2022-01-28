@@ -4,8 +4,12 @@
   "type": "module",
   "packageManager": "yarn@3.2.0-rc.12",
   "scripts": {
+    "postinstall": "node --no-warnings ./scripts/postinstall.js",
     "tf": "node --no-warnings ./scripts/tf.js",
-    "postinstall": "node --no-warnings ./scripts/postinstall.js"
+    "import": "node --no-warnings ./scripts/tf.js import",
+    "state": "node --no-warnings ./scripts/tf.js state",
+    "plan": "node --no-warnings ./scripts/tf.js plan",
+    "apply": "node --no-warnings ./scripts/tf.js apply"
   },
   "dependencies": {
     "cross-spawn": "^7.0.3",

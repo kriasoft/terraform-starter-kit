@@ -6,7 +6,7 @@
 #       requires domain verification in the Google Search Console:
 #       https://search.google.com/search-console/users
 #
-#       Grant `Owner` permission to the `terraform@<example>.iam.gserviceaccount.com`
+#       Grant `Owner` permission to the `terraform@<project>.iam.gserviceaccount.com`
 #       service account used by Terraform Cloud.
 
 # The storage bucket for hosting a single-page web application (SPA)

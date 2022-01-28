@@ -6,7 +6,7 @@ module "project-services" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
   version = "~> 11.3"
 
-  project_id = var.project
+  project_id = local.project
 
   activate_apis = [
     "artifactregistry.googleapis.com",

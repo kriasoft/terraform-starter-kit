@@ -11,14 +11,18 @@
 The basic building blocks for configuring a cloud infrastructure inside of
 a monorepo project using [Terraform](https://www.terraform.io/).
 
+![image](https://user-images.githubusercontent.com/197134/151532424-39a65825-5bd3-4730-b2e0-35ec64bb88d3.png)
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/en/) v16+ with [Yarn](https://yarnpkg.com/) package manager
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) and [Terraform CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [VS Code](https://code.visualstudio.com/) editor with [recommended extensions](.vscode/extensions.json)
 
+## Initial Setup
+
 <details>
-  <summary>How to install Terraform CLI on macOS?</summary><br>
+  <summary><b>How to install Terraform CLI on macOS?</b></summary><br>
 
 ```bash
 $ brew tap hashicorp/tap
@@ -31,7 +35,7 @@ $ yarn tf -version
 </details>
 
 <details>
-  <summary>How to create Google Cloud Platform projects?</summary><br>
+  <summary><b>How to create Google Cloud Platform projects?</b></summary><br>
 
 Simply navigate to [Google Cloud Resource Manager](https://console.cloud.google.com/cloud-resource-manager)
 and create two GCP projects for both `test` (QA) and `prod` (production)
@@ -42,7 +46,7 @@ Fore more information visit https://cloud.google.com/resource-manager/docs/creat
 </details>
 
 <details>
-  <summary>How to configure Terraform Cloud workspaces?</summary><br>
+  <summary><b>How to configure Terraform Cloud workspaces?</b></summary><br>
 
 1. Sign in to [Terraform Cloud](https://cloud.hashicorp.com/products/terraform) dashboard.
 2. Create or join an organization.
@@ -54,7 +58,7 @@ For more information visit https://registry.terraform.io/providers/hashicorp/goo
 </details>
 
 <details>
-  <summary>How to authenticate Terraform CLI in Terraform Cloud?</summary><br>
+  <summary><b>How to authenticate Terraform CLI in Terraform Cloud?</b></summary><br>
 
 1. Create a personal or team [API Token](https://learn.hashicorp.com/tutorials/terraform/cloud-login) via [Terraform Cloud](https://app.terraform.io/app/) dashboard → [Settings](https://app.terraform.io/app/settings/tokens).
 2. Save API token to the `.terraformrc` file in root of the project:
@@ -69,29 +73,56 @@ credentials "app.terraform.io" {
 
 </details>
 
+<details>
+  <summary><b>Customize the project</b></summary><br>
+
+1. Run `yarn install` to bootstrap `.terraformrc` and `infra/overrides.tf` files
+2. Create a [Terraform API Token](https://app.terraform.io/app/settings/tokens) and save it to `.terraformrc` file
+3. Update Terraform Cloud organization name in `infra/backend.tf`
+4. Update other variables in the `infra/locals.tf` file
+5. Ensure that Terraform Cloud workspaces exist and have all the required environment variables
+<br>
+</details>
+
 ## Getting Started
 
-- `yarn install` — installs project dependencies
-- `yarn tf init -upgrade` — initializes a Terraform workspace
-- `yarn tf plan` — creates an execution plan
-- `yarn tf apply` — executes the actions proposed by the `yarn tf plan` command
-
-**NOTE**: By default the `app-test` Terraform workspace is used. In order to use
-the production workspace, set `TF_WORKSPACE` environment variable to `prod`. For
-example:
+Once the initial configuration steps are done (see `infra/backend.tf`,
+`infra/locals.tf`), you should be able to run Terraform CLI commands either
+directly or via a Yarn-based wrapper:
 
 ```bash
-$ TF_WORKSPACE=prod yarn tf plan
-$ TF_WORKSPACE=prod yarn tf apply -auto-approve
+$ terraform -chdir=infra init -upgrade
+$ terraform -chdir=infra plan
+$ terraform -chdir=infra apply -auto-approve
 ```
 
-**NOTE**: You need to run Terraform commands via `yarn tf <command> [...args]`.
+Note that it uses `test` as the default workspace environment defined
+in VSCode's [integrated terminal settings](.vscode/settings.json#L16-L30).
+
+To use a different environment set the `TF_WORKSPACE` environment variable:
+
+```bash
+$ TF_WORKSPACE=prod terraform -chdir=infra plan
+$ TF_WORKSPACE=prod terraform -chdir=infra apply -auto-approve
+```
+
+Alternatively, use the wrapper CLI:
+
+```bash
+# Uses `test` environment by default
+$ yarn tf plan
+$ yarn tf apply -auto-approve
+
+# Explicitly setting `prod` as the selected workspace environment
+$ yarn tf plan --env=prod
+$ yarn tf apply --env=prod -auto-approve
+```
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=tomUWcQ0P3k"><img src="https://user-images.githubusercontent.com/197134/151321818-d47fe54f-c19e-4d4c-9834-c33e589a33e1.png" alt="" width="640" height="360" /></a>
 </p>
 
-Fore more information visit https://learn.hashicorp.com/terraform
+Fore more information visit [learn.hashicorp.com/terraform](https://learn.hashicorp.com/terraform) or join a discussion on [Discord](https://discord.gg/ZwkR8E3tFm).
 
 ## Related Projects
 

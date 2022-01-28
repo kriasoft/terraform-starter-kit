@@ -9,7 +9,7 @@ output "env" {
   value = local.env
 }
 
-output "project_id" {
+output "project" {
   value = trimprefix(data.google_project.default.id, "projects/")
 }
 

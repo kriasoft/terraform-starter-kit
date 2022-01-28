@@ -1,37 +1,27 @@
 /* SPDX-FileCopyrightText: 2022-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import chalk from "chalk";
 import spawn from "cross-spawn";
-import envars from "envars";
-import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Load environment variables for the target Terraform workspace
-// (PROJECT, REGION, ZONE, etc)
-const TF_WORKSPACE = process.env.TF_WORKSPACE ?? "test";
-const envName = TF_WORKSPACE === "prod" ? "prod" : "test";
-const env = envars.config({ env: envName });
-
-const { bold, red, blue } = chalk;
 const cwd = path.join(fileURLToPath(import.meta.url), "../..");
 const TF_DATA_DIR = path.join(cwd, ".terraform");
 const TF_CLI_CONFIG_FILE = path.join(cwd, ".terraformrc");
+let TF_WORKSPACE = process.env.TF_WORKSPACE ?? "test";
 
 // Show a friendly error when Terraform CLI was not found
 process.on("uncaughtException", (/** @type {NodeJS.ErrnoException} */ err) => {
   if (err.code === "ENOENT") {
     console.error(
       [
-        red("╷ "),
-        red("│ ") + bold(`${red("Error:")} Terraform CLI not found`),
-        red("│ "),
-        red("│ ") + `For more information visit:`,
-        red("│ ") +
-          blue(`https://learn.hashicorp.com/tutorials/terraform/install-cli`),
-        red("╵ "),
-      ].join("\n")
+        `╷ `,
+        `│ Error: Terraform CLI not found`,
+        `│ `,
+        `│ For more information visit:`,
+        `│ https://learn.hashicorp.com/tutorials/terraform/install-cli`,
+        `╵ `,
+      ].join("\n"),
     );
     process.exitCode = 1;
   } else {
@@ -41,19 +31,13 @@ process.on("uncaughtException", (/** @type {NodeJS.ErrnoException} */ err) => {
 
 const args = process.argv.slice(2);
 
-const vars = Object.keys(env).reduce(
-  (acc, key) => ({ ...acc, [key.toLowerCase()]: env[key] }),
-  {}
-);
-
-// See `infra/variables.tf`
-// https://www.terraform.io/language/values/variables
-if (["plan", "apply", "import"].includes(args[0])) {
-  fs.writeFileSync(
-    path.join(cwd, "infra/.auto.tfvars.json"),
-    JSON.stringify(vars, null, "  "),
-    "utf-8"
-  );
+// Check for the `--env=<name>` argument
+for (let i = 0; i < args.length; i++) {
+  const [, envName] = args[i]?.match(/--env=(\w+)/) ?? [];
+  if (envName) {
+    TF_WORKSPACE = envName || TF_WORKSPACE;
+    args.splice(i--, 1);
+  }
 }
 
 // Use `/infra` as the root directory

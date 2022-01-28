@@ -5,21 +5,6 @@ import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 
 const files = {
-  "env/.local.override.env": [
-    `# Variable overrides for the "local" environment`,
-    ``,
-  ].join("\n"),
-
-  "env/.test.override.env": [
-    `# Variable overrides for the "test" (QA) environment`,
-    ``,
-  ].join("\n"),
-
-  "env/.prod.override.env": [
-    `# Variable overrides for the "prod" (production) environment`,
-    ``,
-  ].join("\n"),
-
   ".terraformrc": [
     `# Terraform Cloud Credentials`,
     `# https://app.terraform.io/app/settings/tokens`,
@@ -33,10 +18,34 @@ const files = {
     `# Terraform Configuration Overrides`,
     `# https://www.terraform.io/language/files/override`,
     ``,
+    `# terraform {`,
+    `#   backend "remote" {`,
+    `#     organization = "example"`,
+    ``,
+    `#     workspaces {`,
+    `#       prefix = "app-"`,
+    `#     }`,
+    `#   }`,
+    `# }`,
+    ``,
+    `# locals {`,
+    `#   # The primary application domain name`,
+    `#   domain = "example.com"`,
+    ``,
+    `#   # Google Cloud Project`,
+    `#   # https://cloud.google.com/resource-manager/docs/creating-managing-projects`,
+    `#   project = {`,
+    `#     "prod" = "example"`,
+    `#     "test" = "example-test"`,
+    `#     "dev"  = "example-prod"`,
+    `#   }[local.env]`,
+    `# }`,
+    ``,
   ].join("\n"),
 };
 
 for (const filename of Object.keys(files)) {
   if (existsSync(filename)) continue;
+  console.log(`Creating ${filename}`);
   await writeFile(filename, files[filename], "utf-8");
 }

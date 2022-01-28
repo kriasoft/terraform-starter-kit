@@ -30,19 +30,17 @@ terraform {
 }
 
 provider "google" {
-  project = var.project
-  region  = var.region
-  zone    = var.zone
+  project = local.project
+  region  = local.region
+  zone    = local.zone
 }
 
 provider "google-beta" {
-  project = var.project
-  region  = var.region
-  zone    = var.zone
+  project = local.project
+  region  = local.region
+  zone    = local.zone
 }
 
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
-
-data "google_project" "default" {}

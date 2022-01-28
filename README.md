@@ -124,6 +124,10 @@ $ yarn apply --env=prod -auto-approve
 
 Fore more information visit [learn.hashicorp.com/terraform](https://learn.hashicorp.com/terraform) or join the discussion on [Discord](https://discord.gg/ZwkR8E3tFm).
 
+## Backers
+
+<a href="https://reactstarter.com/b/1"><img src="https://reactstarter.com/b/1.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/2"><img src="https://reactstarter.com/b/2.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/3"><img src="https://reactstarter.com/b/3.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/4"><img src="https://reactstarter.com/b/4.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/5"><img src="https://reactstarter.com/b/5.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/6"><img src="https://reactstarter.com/b/6.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/7"><img src="https://reactstarter.com/b/7.png" height="60" /></a>&nbsp;&nbsp;<a href="https://reactstarter.com/b/8"><img src="https://reactstarter.com/b/8.png" height="60" /></a>
+
 ## Related Projects
 
 - [GraphQL API and Relay Starter Kit](https://github.com/kriasoft/relay-starter-kit) — full-stack monorepo template (GCP, GraphQL API, React, Relay)
